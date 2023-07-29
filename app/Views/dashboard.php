@@ -12,26 +12,19 @@
             </div>
             <div class="card-body">
                 <form id="servicesForm">
-                    <h6 class="card-title">Please select services:</h6>
+                    <h6 class="card-title">Pilih layanan:</h6>
                     <br>
 
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="serviceA" name="services[]" value="Service A">
-                        <label class="form-check-label" for="serviceA">Service A</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="serviceB" name="services[]" value="Service B">
-                        <label class="form-check-label" for="serviceB">Service B</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="serviceC" name="services[]" value="Service C">
-                        <label class="form-check-label" for="serviceC">Service C</label>
-                    </div>
+                    <?php foreach ($services as $service) { ?>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="<?= 'service' . esc($service['name']) ?>" name="services[]" value="<?= esc($service['name']) ?>">
+                            <label class="form-check-label" for="<?= 'service' . esc($service['name']) ?>"><?= esc($service['name']) ?></label>
+                        </div>
+                    <?php } ?>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+
             </div>
         </div>
 
