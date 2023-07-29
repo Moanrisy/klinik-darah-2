@@ -32,6 +32,10 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 // $routes->get('/', '\agungsugiarto\boilerplate\Controllers\DashboardController::index');
 
+use App\Controllers\OrderController;
+
+$routes->post('/order/create', [OrderController::class, 'create']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

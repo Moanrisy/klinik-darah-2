@@ -11,13 +11,13 @@
                 <h5 class="m-0">Daftar layanan</h5>
             </div>
             <div class="card-body">
-                <form id="servicesForm">
+                <form id="servicesForm" action="/order/create" method="post">
                     <h6 class="card-title">Pilih layanan:</h6>
                     <br>
 
                     <?php foreach ($services as $service) { ?>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="<?= 'service' . esc($service['name']) ?>" name="services[]" value="<?= esc($service['name']) ?>">
+                            <input type="checkbox" class="form-check-input" id="<?= 'service' . esc($service['name']) ?>" name="services[]" value="<?= esc($service['id']) ?>">
                             <label class="form-check-label" for="<?= 'service' . esc($service['name']) ?>"><?= esc($service['name']) ?></label>
                         </div>
                     <?php } ?>
