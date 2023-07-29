@@ -20,7 +20,7 @@ class OrderSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'user_id' => 3, // Replace with the user_id of the user placing this order
+                'user_id' => 2, // Replace with the user_id of the user placing this order
                 'total_price' => 180.50,
                 'created_at' => date('Y-m-d H:i:s'),
             ],
