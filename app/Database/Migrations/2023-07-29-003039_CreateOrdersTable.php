@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class CreateOrdersTable extends Migration
 {
@@ -22,8 +23,13 @@ class CreateOrdersTable extends Migration
                 'type' => 'DECIMAL',
                 'constraint' => '10,2',
             ],
+            'is_paid' => [
+                'type' => 'BOOLEAN',
+                'default' => false, // Assuming the default value is 'not paid'
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
             ],
         ]);
 
