@@ -47,10 +47,12 @@ class OrderController extends BaseController
         // }
 
         $total_price = 0;
+        $ordered_services = [];
         foreach ($data['services'] as $service) {
             foreach ($post['services[]'] as $ordered_service_id) {
                 if ($service['id'] == $ordered_service_id) {
                     $total_price += $service['price'];
+                    array_push($ordered_services, $service);
                 }
             }
         }
@@ -58,24 +60,38 @@ class OrderController extends BaseController
         // echo $total_price;
         // echo user()->id;
 
-        $model = model(OrderModel::class);
-        $model->insert([
+        // TODO split this into function later
+        // func save order to db
+        $order = [
             'user_id' => user()->id,
             'total_price'  => $total_price,
-        ]);
+        ];
+        $model = model(OrderModel::class);
+        $model->insert($order);
 
+        // TODO split this into function later
+        // func save ordered services to db
         $order_id = $model->insertID();
+
         foreach ($post['services[]'] as $ordered_service_id) {
             $model = model(OrderServicesModel::class);
-            $model->insert([
+
+            $ordered_service = [
                 'order_id' => $order_id,
                 'service_id'  => $ordered_service_id,
-            ]);
+            ];
+
+            $model->insert($ordered_service);
         }
 
-        $data = ['post' => $post];
+        $data = [
+            'order_id' => $order_id,
+            'order' => $order,
+            'ordered_services' => $ordered_services
+        ];
 
-        return view('debug', $data);
+        // return view('test', $data);
+        return view('payment_order', $data);
         // return view('dashboard', $data);
     }
 }
