@@ -115,13 +115,6 @@ class OrderController extends BaseController
 
 
         // Redirect to dashboard after payment success
-        $service_model = model(ServiceModel::class);
-
-        $data = [
-            'title' => 'Dashboard',
-            'services' => $service_model->getServices(),
-        ];
-
-        return view('dashboard', $data);
+        return redirect()->to('admin');
     }
 }
