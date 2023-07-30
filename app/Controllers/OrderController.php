@@ -94,4 +94,34 @@ class OrderController extends BaseController
         return view('payment_order', $data);
         // return view('dashboard', $data);
     }
+
+    public function process_payment()
+    {
+        helper('form');
+
+        $order_id = $this->request->getPost(['order_id']);
+        $service_model = model(OrderModel::class);
+
+        // Check if the order with the given order_id exists before attempting to update
+        $order = $service_model->find($order_id);
+        if (!$order) {
+            // Handle the case when the order doesn't exist
+            echo "Order not found.";
+            return;
+        }
+
+        // Update the record with the given order_id
+        $service_model->set('is_paid', true)->where('id', $order_id)->update();
+
+
+        // Redirect to dashboard after payment success
+        $service_model = model(ServiceModel::class);
+
+        $data = [
+            'title' => 'Dashboard',
+            'services' => $service_model->getServices(),
+        ];
+
+        return view('dashboard', $data);
+    }
 }

@@ -35,6 +35,7 @@ $routes->get('/', 'Home::index');
 use App\Controllers\OrderController;
 
 $routes->post('/order/create', [OrderController::class, 'create']);
+$routes->post('/order/process_payment', [OrderController::class, 'process_payment']);
 
 /*
  * --------------------------------------------------------------------

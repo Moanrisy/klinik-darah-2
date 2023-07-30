@@ -52,6 +52,16 @@
                     <h4>Total Price</h4>
                     <p><strong>Total:</strong> <?php echo '$' . number_format($order['total_price'], 2); ?></p>
 
+                    <!-- Add the payment form with a hidden submit button -->
+                    <form id="paymentForm" action="/order/process_payment" method="post">
+                        <!-- Include any necessary hidden fields or payment information here -->
+                        <input type="hidden" name="order_id" value="<?php echo $order_id; ?>">
+                        <!-- <input type="hidden" name="total_price" value="<?php echo $order['total_price']; ?>"> -->
+
+                        <!-- Hide the actual submit button -->
+                        <button type="submit" id="submitPaymentForm" style="display: none;"></button>
+                    </form>
+
                     <!-- Add a button to open the payment modal -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal">Proceed to Pay</button>
 
@@ -86,4 +96,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    function proceedToPay() {
+        // Trigger the form submission when the "Proceed to Pay" button is clicked
+        document.getElementById('submitPaymentForm').click();
+    }
+</script>
+
 <?= $this->endSection() ?>
